@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+Создать пост
+{% endblock title %}
+
+
+{% block content %}
+
+<!--Форма создания постов-->
+    <h4>Создать пост</h4>
+    <form action="" method="post" style="text-align: center">
+        {% csrf_token %}
+        {{ form.as_p }}
+       <input type="submit" value="Создать" />
+    </form>
+    <hr>
+
+{% endblock content %}

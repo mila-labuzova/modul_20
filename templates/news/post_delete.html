@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+Удалить пост "{{ post.name }}"
+{% endblock title %}
+
+
+{% block content %}
+
+<!--Форма удаления постов-->
+    <form action="" method="post" style="text-align: center">
+        {% csrf_token %}
+        <p>Вы действительно хотите удалить "{{ post.name }}"?</p>
+       <input type="submit" value="Удалить" />
+    </form>
+    <hr>
+
+{% endblock content %}
