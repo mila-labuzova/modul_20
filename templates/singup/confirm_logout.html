@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Подтверждение выхода из системы
+{% endblock title %}
+
+
+{% block content %}
+
+    <div style="text-align: center">
+        <h4>Вы действительно хотите выйти из системы?</h4>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Подтвердить"/>
+        </form>
+        <form action="{% url 'profile' %}" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Отмена"/>
+        </form>
+    </div>
+    <hr>
+
+{% endblock content %}

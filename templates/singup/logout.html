@@ -1,0 +1,21 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Выход из системы
+{% endblock title %}
+
+
+{% block content %}
+
+    <div style="text-align: center">
+        <h4>Вы вышли из системы</h4>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Войти"/>
+        </form>
+        <a href="/">Вернуться на главную</a>
+    </div>
+    <hr>
+
+{% endblock content %}

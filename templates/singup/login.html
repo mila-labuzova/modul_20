@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Авторизация
+{% endblock title %}
+
+
+{% block content %}
+
+<!--Форма входа в аккаунт-->
+    <div style="text-align: center">
+        <h4>Вход в систему</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <input type="submit" value="Войти"/>
+        </form>
+        <h5>Нет аккаунта?</h5>
+        <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Регистрация"/>
+        </form>
+    </div>
+    <hr>
+
+{% endblock content %}

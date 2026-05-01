@@ -1,0 +1,41 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Страница пользователя
+{% endblock title %}
+
+
+{% block content %}
+<div style="text-align: center">
+    <div>
+        <h4 style="text-align: center">Страница пользователя {{ user.username }}</h4>
+        <p>Здесь будет Ваша персональная информация</p>
+    </div>
+    <div>
+        {% if is_not_authors %}
+        <h5>Хотите стать автором и создавать новости и статьи?</h5>
+        <button>
+            <a href="{% url 'upgrade' %}">Стать автором</a>
+        </button>
+        {% else %}
+        <h5>Вы можете создать новость или статью</h5>
+        <br>
+        <button>
+            <a href="{% url 'news_create' %}">Создать новость</a>
+        </button>
+        <button>
+            <a href="{% url 'articles_create' %}">Создать статью</a>
+        </button>
+        {% endif %}
+    </div>
+    <br>
+    <div>
+        <button>
+            <a href="{% url 'account_logout' %}">Выйти</a>
+        </button>
+    </div>
+</div>
+<hr>
+
+{% endblock content %}
