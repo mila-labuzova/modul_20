@@ -1,0 +1,75 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+Все посты
+{% endblock title %}
+
+
+{% block content %}
+    <h1>Все посты</h1>
+    <hr>
+
+<!--Выводим все посты на страницу-->
+
+    {% if post_list %}
+        <p>Всего постов на странице: {{ post_list|length }}</p>
+        <table>
+            <tr>
+                <td><h5>Название:</h5></td>
+                <td><h5>Автор:</h5></td>
+                <td><h5>Дата добавления:</h5></td>
+                <td><h5>Тип поста:</h5></td>
+                <td><h5>Превью:</h5></td>
+            </tr>
+           {% for post in post_list %}
+           <tr>
+               <td><a style="color: black; blue; text-decoration: none"
+                      href="{% url 'post_detail' post.id %}" class="one_post-link">
+                   {{ post.name|censor }}</a></td>
+               <td>{{ post.author}}</td>
+               <td>{{ post.date_add|date:'d M Y' }}</td>
+               <td>{{ post.get_type_display }}</td>
+               <td>{{ post.text|truncatechars:20|censor }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+
+<!--Пагинация-->
+
+<!--Информация о предыдущих страницах-->
+       {% if page_obj.has_previous %}
+           <a href="?{% url_replace page=1 %}">
+               1
+           </a>
+           {% if page_obj.previous_page_number != 1 %}
+               ...
+               <a href="?{% url_replace page=page_obj.previous_page_number %}">
+                   {{ page_obj.previous_page_number }}
+               </a>
+           {% endif %}
+       {% endif %}
+    <!--Информация о текущей странице-->
+       {{ page_obj.number }}
+    <!--Информация о следующих страницах-->
+       {% if page_obj.has_next %}
+           <a href="?{% url_replace page=page_obj.next_page_number %}">
+               {{ page_obj.next_page_number }}
+           </a>
+           {% if paginator.num_pages != page_obj.next_page_number %}
+               ...
+               <a href="?{% url_replace page=page_obj.paginator.num_pages %}">
+                   {{ page_obj.paginator.num_pages }}
+               </a>
+           {% endif %}
+       {% endif %}
+
+<!--Если постов на сайте нет-->
+   {% else %}
+       <h2>В данный момент постов нет</h2>
+   {% endif %}
+
+{% endblock content %}

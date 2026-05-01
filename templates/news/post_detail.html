@@ -1,0 +1,47 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+{{ post_detail.name }}
+{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center;">{{ post_detail.name|censor }}</h1>
+    <hr>
+    <table>
+        <tr>
+            <td><strong>Автор: {{ post_detail.author }}</strong></td>
+            <td><strong>Дата публикации: {{ post_detail.date_add|date:'d M Y' }}</strong></td>
+            <td><strong>Тема: {{ post_detail.category.all|join:', ' }}</strong></td>
+            <td><strong>Тип поста: {{ post_detail.get_type_display }}</strong></td>
+            <td><strong>Рейтинг: {{ post_detail.rating }}</strong></td>
+        </tr>
+    </table>
+    <hr>
+    <div style="text-align: right">
+        {% if post_detail.type == 'NW' %}
+            <a href="{% url 'news_edit' post_detail.id %}" style="color: black; text-decoration: none; border: 1px solid black; padding: 2px; margin: 2px">
+                Редактировать
+            </a>
+        {% else %}
+            <a href="{% url 'articles_edit' post_detail.id %}" style="color: black; text-decoration: none; border: 1px solid black; padding: 2px; margin: 2px">
+                Редактировать
+            </a>
+        {% endif %}
+        {% if post_detail.type == 'NW' %}
+            <a href="{% url 'news_delete' post_detail.id %}" style="color: black; text-decoration: none; border: 1px solid black; padding: 2px; margin: 2px">
+                Удалить
+            </a>
+        {% else %}
+            <a href="{% url 'articles_delete' post_detail.id %}" style="color: black; text-decoration: none; border: 1px solid black; padding: 2px; margin: 2px">
+                Удалить
+            </a>
+        {% endif %}
+    </div>
+    <hr>
+    {{ post_detail.text|censor }}
+    <hr>
+    <h4>Комментарии:</h4>
+    <p>Тут будут комментарии.</p>
+{% endblock content %}

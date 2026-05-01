@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+
+{% block title %}
+Редактировать пост "{{ post.name }}"
+{% endblock title %}
+
+
+{% block content %}
+
+<!--Форма изменения постов-->
+    <h4>Редактировать пост "{{ post.name }}"</h4>
+    <form action="" method="post" style="text-align: center">
+        {% csrf_token %}
+        {{ form.as_p }}
+       <input type="submit" value="Сохранить изменения" />
+    </form>
+    <hr>
+
+{% endblock content %}
